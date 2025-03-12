@@ -1,0 +1,44 @@
+:root{
+    --blue: #2222dd;
+    --light-blue: #6666ff;
+}
+
+.shadow-text {
+    text-align: center;
+    text-shadow: 2rem;
+}
+
+button {
+    max-width: 20 px;
+    padding: 10 px;
+    cursor: pointer;
+    background-color: var(--blue);
+    transition: 0.5s;
+}
+
+button:hover{
+    
+    background-color: var(--light-blue);
+
+}
+
+button .menu{
+    padding-left: 20px;
+}
+
+.horizontal-container{
+    display: flex;
+    gap: 5px;
+}
+
+.grid-container{
+    display: grid;
+    gap: 10px;
+}
+
+.card {
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 20px;
+}
