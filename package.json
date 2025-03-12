@@ -1,0 +1,24 @@
+{
+  "name": "sdsfrontend2025course",
+  "version": "1.0.0",
+  "description": "Anytime-course: Software Development Skills: Front-End 2024-25",
+  "main": "index.html",
+  "homepage": "https://jepuli124.github.io/SDSfrontend2025course",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d moduleLearning/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jepuli124/SDSfrontend2025course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jepuli124/SDSfrontend2025course/issues"
+  },
+  "dependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
