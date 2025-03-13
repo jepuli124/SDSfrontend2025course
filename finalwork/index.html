@@ -17,10 +17,10 @@
                 <button class="btn">Home </button>
             </li>
             <li class="price menuItem" >
-                <button class="btn">Home </button>
+                <button class="btn">Middle </button>
             </li>
             <li class="price menuItem">
-                <button class="btn">Home </button>
+                <button class="btn">bottom </button>
             </li>
         </ul>
     </div>
@@ -35,104 +35,111 @@
 
 
 
-    <!-- Prices -->
+    <!-- GRID -->
     <section>
         <div class="grid-container">
             <div class="card">
                 <div class="cardUp">
-                    <h3 class="shadow-text">Free</h3>
-                    <p>Those who don't want to support us</p>
+                    <h3 class="shadow-text">Character classes</h3>
+                    <p>At start of the game, you may choose a class from following</p>
                 </div>
                 <div class="cardDown">
                     <ul class="price">
                         <li class="price">
-                            <i class="fa-solid fa-check"></i> ads
+                            Barbarian
+                            Strong melee build, uses brute force
+                            difficulty: easy
                         </li>
                         <li class="price">
-                            <i class="fa-solid fa-x"></i> Support
+                            Alchemist
+                            agile, better loot, unique items
+                            difficulty: medium
                         </li>
                         <li class="price">
-                            <i class="fa-solid fa-x"></i> Premium tier coffee image
+                            Wizard
+                            weak, fun spells, first strike
+                            difficulty: hard
                         </li>
                     </ul>
                 </div>
-                <button class="btn price"> Free </button>
             </div>
             <div class="card">
                 <div class="cardUp">
-                    <h3 class="shadow-text">No Ads</h3>
-                    <p>Hate ads? this is for you</p>
+                    <h3 class="shadow-text">Enemy types</h3>
+                    <p>Learn about different enemies</p>
                 </div>
                 <div class="cardDown">
                     <ul class="price">
                         <li class="price">
-                            <i class="fa-solid fa-check"></i> ads
+                            a knight
+                            Strong melee, lots of armor, slow
+                            difficulty: easy
                         </li>
                         <li class="price">
-                            <i class="fa-solid fa-check"></i> Support
+                            an undead priest
+                            weak, high damage, agile
+                            difficulty: medium
                         </li>
                         <li class="price">
-                            <i class="fa-solid fa-x"></i> Premium tier coffee image
+                            a small dragon
+                            Strong, multiple attacks, final boss
+                            difficulty: hard
                         </li>
                     </ul>
                 </div>
-                <button class="btn price"> Buy No Ads </button>
             </div>
             <div class="card">
                 <div class="cardUp">
-                    <h3 class="shadow-text">Premium</h3>
-                    <p>plz give us your money</p>
-                    <p class="epic-text">very epic</p>
+                    <h3 class="shadow-text">Items</h3>
+                    <p>Different items and how to use them</p>
+
                 </div>
                 <div class="cardDown">
                     <ul class="price">
                         <li class="price">
-                            <i class="fa-solid fa-check"></i> ads
+                            weapons: type "attack" and then choose the weapon's index number to use it. 
                         </li>
                         <li class="price">
-                            <i class="fa-solid fa-check"></i> Support
+                            potions: type the name of the item to use it. These are single time uses.
                         </li>
                         <li class="price">
-                            <i class="fa-solid fa-check"></i> Premium tier coffee image
+                            magic: type "magic" and then the spell's index to use it. Have limited uses.
                         </li>
                     </ul>
                 </div>
-                <button class="btn price"> <i class="fa-solid fa-face-smile"></i> </button>
             </div>
         </div>
     </section>
     
-    <!-- GRID -->
+    <!-- Flexbox -->
     <section class="baseBackground">
-        <span class="epic-text"> GRID </span>
-        <div class="horizontal-container">
-            <div>
-                <h3 class="shadow-text">Where can I donate money?</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Obcaecati doloremque assumenda aut dolorem recusandae quibusdam
-                    aliquid. Repellat animi quam vitae.</p>
-            </div>
-            <div>
-                <h3 class="shadow-text">How can I do x</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Obcaecati doloremque assumenda aut dolorem recusandae quibusdam
-                    aliquid. Repellat animi quam vitae.</p>
-            </div>
-            <div>
-                <h3 class="shadow-text">Where is the coffee image</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Obcaecati doloremque assumenda aut dolorem recusandae quibusdam
-                    aliquid. Repellat animi quam vitae. not here</p>
+        <span class="epic-text"> Inventory </span>
+        <div class="flex-container inventory colorBackground" id="Inventory">
+            <div class="inventory-slot">
+                <h3 class="shadow-text">Your inventory is currently empty</h3>
+                <p>Nothing here</p>
             </div>
         </div>
     </section>
     
+    <!-- game interface -->
+    <section class="baseBackground">
+        <h1 class="epic-text"> The Game </h1>
+        <div class="colorBackground game-container">
+            <p id="output" class="game-text">Send "command" button to start</p>
+            <form action="" id="input">
+                <input type="text" class="game-text" id="inputText"> </input>
+                <input type="submit" class="game-text" value="Command" />
+            </form>
+            <p id="prevInput" class="game-text"> </p>
+        </div>
+    </section>
     
 
     <!-- Footer -->
-    <section class="baseBackground">
+    <section class="blackBackground">
         <span class="epic-text"> FOOTER </span>
-        <h1 class="epic-text"> Contacs </h1>
+        <h1 class="epic-text"> Do not find the egg </h1>
         <div class="grid-container footer-grid">
             <div>
                 <ul>
@@ -140,26 +147,26 @@
                         <a href="another.html"> Another page </a>
                     </li>
                     <li>
-                        <a href="https://www.twitch.tv"> link 2</a>
+                        <a href="https://youtu.be/xfGrN3ZsPLA?si=Fm-G3V2NHOI8__lX"> A beautiful song </a>
                     </li>
                     <li>
-                        <a href="https://www.twitch.tv"> link 3</a>
+                        <a href="https://youtube.com/playlist?list=PL7B16C924C1FAD7BD&si=i4Ik7_h-iPptAziA"> some music for the game</a>
                     </li>
                     <li>
-                        <a href="https://www.twitch.tv"> link 4</a>
+                        <a href="https://youtube.com/playlist?list=PLR5APJwPaxYLbEsztLyouK8VaOqh8b3vm&si=0dYQAwoPFXrCSVnm"> some more music</a>
                     </li>
                 </ul>
             </div>
             <div>
                 <ul>
                     <li>
-                        <a href="https://www.twitch.tv"> link 5</a>
+                        <a href="https://github.com/jepuli124/SDSfrontend2025course">Github repocitory for this site</a>
                     </li>
                     <li>
-                        <a href="https://www.twitch.tv"> link 6</a>
+                        <a href="https://www.youtube.com/watch?v=Blv9qVYlioY&t=2096s">LifeChanger.bat</a>
                     </li>
                     <li>
-                        <a href="https://www.twitch.tv"> link 7</a>
+                        <a href="https://www.google.com/search?sca_esv=ee3395f8cbb9de9c&sxsrf=AHTn8zpDMfHiONh1hfvUXqqnhUJ5h01Prg:1741858000852&q=cute+cat+grill&udm=2&fbs=ABzOT_Apl9KzGeH4sQkHvT4u1TLYfsQjkMwn5JMlk-Yz7vpz35g0beDk4f0ljiRgQ1g6Fy1A4eXK_9ZtlnyhjHufjtbMWOHDIEPtIzOgyepN8Qf1nSmF-Eo7OqLldDF61k_1b4bUbRLtk5kLyn3BJIxbk6TVRKiBQ9uV0OggQ7vF75Hz9MglZdFGogItWNkFFa56ApISMGj1&sa=X&ved=2ahUKEwixgo_b3oaMAxXXKRAIHU_aMbkQtKgLegQIFBAB&biw=1920&bih=925&dpr=1"> cute cat grills</a>
                     </li>
                     <li>
                         <a href="https://www.patreon.com/DetailedDungeons"> Really nice dnd maps by Piksujeij</a>
@@ -168,9 +175,9 @@
             </div>
             <div class="card">
                 <form action="">
-                    <input type="text"></input>
+                    <input type="text" class="game-text"></input>
                     <br />
-                    <input type="submit" value="send"></input>
+                    <input type="submit" value="refresh the page" class="game-text"></input>
                 </form>
             </div>
         </div>

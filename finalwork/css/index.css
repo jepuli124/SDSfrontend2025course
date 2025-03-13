@@ -90,6 +90,23 @@ section {
     
 }
 
+/* Game css*/
+
+.game-container {
+    justify-items: center;
+    align-items: center;
+}
+
+.inventory {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.game-text {
+    font-size: 24px;
+}
+
+
 .off {
     display: none;
     visibility: collapse;
@@ -144,6 +161,11 @@ section {
     padding: 20px;
 }
 
+.blackBackground {
+    background-color: #000;
+    padding: 20px;
+}
+
 .colorBackground {
     background-color: var(--backgroud);
     padding: 20px;
@@ -162,7 +184,6 @@ li {
     justify-items: center;
     display: grid;
 
-
 }
 
 .cardUp {
@@ -175,6 +196,18 @@ li {
     align-items: center;
     justify-items: center;
     justify-content: center;
+}
+
+.inventory-slot {
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    justify-items: center;
+    display: grid;
+    border: 2px solid #bbb;
+
 }
 
 
