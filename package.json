@@ -6,7 +6,7 @@
   "homepage": "https://jepuli124.github.io/SDSfrontend2025course",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "gh-pages -d moduleLearning/"
+    "deploy": "gh-pages -d finalwork/"
   },
   "repository": {
     "type": "git",
