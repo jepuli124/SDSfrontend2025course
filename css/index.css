@@ -90,6 +90,27 @@ section {
     
 }
 
+/* Game css*/
+
+.game-container {
+    justify-items: center;
+    align-items: center;
+}
+
+.inventory {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.game-text {
+    font-size: 24px;
+}
+
+.output-text {
+    margin-top: 12 px;
+    margin-bottom: 12 px;
+}
+
 .off {
     display: none;
     visibility: collapse;
@@ -111,8 +132,41 @@ section {
     font-size: 24px;
 }
 
+.really-epic-text {
+    color: var(--light-blue);
+    font-size: 20px;
+    transition: 60s;
+}
+
+.really-epic-text:hover {
+    font-size: 224px;
+    font-style: bold;
+}
+
+.funny {
+    transition-delay: 3s;
+    transition-timing-function: ease-in;
+    transition: 120s;
+    font-size: 2400px;
+    transition-property: font-size;
+}
+
+@starting-style { /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions */
+    .funny {
+        font-size: 20px;
+    }
+}
+
+
+
+
 .baseBackground {
     background-color: var(--white);
+    padding: 20px;
+}
+
+.blackBackground {
+    background-color: #000;
     padding: 20px;
 }
 
@@ -134,7 +188,6 @@ li {
     justify-items: center;
     display: grid;
 
-
 }
 
 .cardUp {
@@ -147,6 +200,30 @@ li {
     align-items: center;
     justify-items: center;
     justify-content: center;
+}
+
+.inventory-slot {
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    justify-items: center;
+    display: grid;
+    border: 2px solid #bbb;
+
+}
+
+.common {
+    background-color: #bbb;
+}
+
+.uncommon {
+    background-color: #6666ff;
+}
+
+.rare {
+    background-color: #cb2b2b;
 }
 
 
