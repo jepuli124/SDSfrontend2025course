@@ -106,6 +106,10 @@ section {
     font-size: 24px;
 }
 
+.output-text {
+    margin-top: 12 px;
+    margin-bottom: 12 px;
+}
 
 .off {
     display: none;
@@ -208,6 +212,18 @@ li {
     display: grid;
     border: 2px solid #bbb;
 
+}
+
+.common {
+    background-color: #bbb;
+}
+
+.uncommon {
+    background-color: #6666ff;
+}
+
+.rare {
+    background-color: #cb2b2b;
 }
 
 

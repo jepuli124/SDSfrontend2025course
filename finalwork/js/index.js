@@ -10,7 +10,8 @@ let gameCharacter = {
 let enemy = {
     health: 0,
     damage: 0,
-    damageLikelyhood: 0
+    damageLikelyhood: 0,
+    stun: 0
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     gameInput.addEventListener("submit", (e) => {
         e.preventDefault();
+        clearOutput()
         const command = document.getElementById("inputText")
         additionalAction = gameStateAction() 
         if (additionalAction){
@@ -71,21 +73,14 @@ const performCommand = (command) => {
     output("Command: " + command + " was executed");
 } 
 
+const clearOutput = () => {
+    const outputText = document.getElementById("output")
+    outputText.innerText = ""
+}
+
 const output = (text) => {
     const outputText = document.getElementById("output")
-
-    let state = 0
-
-    //finds first line break, this make that there is a single line of history
-    for (let index = 0; index < outputText.innerText.length; index++) {
-        if("\n" == outputText.innerText[index]) {
-            state = index + 1
-            break
-        }
-    }
-
-    const previousText = outputText.innerText.slice(state, outputText.innerText.length)
-    outputText.innerText =  previousText + "\n" + text;
+    outputText.innerText = outputText.innerText + "\n" + text;
 }
 
 const createBarbarian = () => {
@@ -132,26 +127,184 @@ const gameSpawnEnemy = (command) => {
         enemy.health = 10
         enemy.damage = 2
         enemy.damageLikelyhood = 1.0
+        enemy.stun = 0
     } else if (rando < 0.9) {
         output("The enemy is a undead priest")
         enemy.health = 6
         enemy.damage = 5
         enemy.damageLikelyhood = 0.8
+        enemy.stun = 0
     } else {
         output("The enemy is a dragon")
         enemy.health = 40
         enemy.damage = 3
         enemy.damageLikelyhood = 0.6
+        enemy.stun = 0
+    }
+
+    if(gameCharacter.class == "wizard"){
+        enemy.stun = 1
     }
     
 }
 
 const gameFight = (command) => {
+    let damageDealt = "You did nothing (probably typo in command)";
+    let damageReceived = "Enemy did nothing";
+    if (command == "attack") {
+        if(gameCharacter.listOfItems.includes("axe")){
+            enemy.health -= 4
+            damageDealt = "You hit them with an axe dealing 4 damage"
+        } else {
+            enemy.health -= 1
+            damageDealt = "You hit them with a fist dealing 1 damage"
+        }
+    } else if (gameCharacter.listOfItems.includes(command)){
+        if(command == "axe"){
+            enemy.health -= 4
+            damageDealt = "You hit them with an axe dealing 4 damage"
+        }
+        if(command == "health potion"){
+            gameCharacter.health += 10
+            damageDealt = "You drank a health potion, +10 hp"
+            gameCharacter.listOfItems.splice(gameCharacter.listOfItems.indexOf(command), 1)
+        }
+        if(command == "acid potion"){
+            enemy.health -= 8
+            damageDealt = "You threw an acid potion at them dealing 8 damage"
+            gameCharacter.listOfItems.splice(gameCharacter.listOfItems.indexOf(command), 1)
+        }
+        if(command == "ice potion"){
+            enemy.health -= 2
+            enemy.stun += 1
+            damageDealt = "You threw an ice potion at them dealing 2 damage and freezing them"
+            gameCharacter.listOfItems.splice(gameCharacter.listOfItems.indexOf(command), 1)
+        }
+        if(command == "holy potion"){
+            gameCharacter.health += 15
+            damageDealt = "You prayed upon an holy potion healing 15 hp."
+            if(enemy.damageLikelyhood == 0.8){
+                damageDealt += " and dealth 10 damage to the undead"
+            }
+            gameCharacter.listOfItems.splice(gameCharacter.listOfItems.indexOf(command), 1)
+        }
+        if(command == "poison potion"){
+            if(enemy.damageLikelyhood !== 0.8){
+                enemy.health -= 9
+                damageDealt = "You threw an poison potion at them dealing 9 damage"
+            } else {
+                enemy.health -= 3
+                damageDealt = "You threw an poison potion at them dealing 3 damage"
+            }
+            gameCharacter.listOfItems.splice(gameCharacter.listOfItems.indexOf(command), 1)
+        }
+        if(command == "fire spell"){
+            if(enemy.damageLikelyhood !== 0.8){
+                enemy.health -= 7
+                damageDealt = "You cast a fire spell at them dealing 7 damage"
+            } else {
+                enemy.health -= 4
+                damageDealt = "You cast a fire spell at them dealing 4 damage"
+            }
+        }
+        if(command == "ice spell"){
+            enemy.health -= 3
+            enemy.stun += 1
+            damageDealt = "You cast ice spell at them dealing 3 damage and freezing them"
+            gameCharacter.listOfItems.splice(gameCharacter.listOfItems.indexOf(command), 1)
+        }
+        if(command == "health spell"){
+            gameCharacter.health += 8
+            damageDealt = "You cast a health spell, +8 hp"
+            gameCharacter.listOfItems.splice(gameCharacter.listOfItems.indexOf(command), 1)
+        }
+        if(command == "rng spell"){
+            rng = Math.random()
+            if(rng > 0.6 && rng <= 0.8){
+                gameCharacter.health += 30
+                damageDealt = "You cast a strange health spell, +30 hp"
+            } else if (rng > 0.8) {
+                enemy.health -= 50
+                damageDealt = "You cast a strange light spell at them dealing 50 damage"
+            }
+            gameCharacter.listOfItems.splice(gameCharacter.listOfItems.indexOf(command), 1)
+        }
+    } 
 
+    if(enemy.health <= 0){
+        gameCharacter.gameState += 1
+    } else if(Math.random() < enemy.damageLikelyhood){
+        if(enemy.stun <= 0){
+            gameCharacter.health -= enemy.damage
+            damageReceived = "Enemy dealt " + String(enemy.damage) + " damage to you."
+        } else {
+            damageReceived = "Enemy was stun/frozen/too slow this turn."
+            enemy.stun -= 1
+        }
+        
+    }
+    output(damageDealt + ". " + damageReceived)
+    if(enemy.health <= 0){
+        output("enemy died, press command to receive loot")
+    }
+    if(gameCharacter.health <= 0){
+        output("you died :(, press command to play again")
+        gameCharacter.gameState = 0
+    }
 }
 
 const gameLoot = (command) => {
+    if(gameCharacter.class == "barbarian"){
+        gameCharacter.listOfItems.push("health potion")
+        output("you found health potion!")
+    } else if (gameCharacter.class == "alchemist") {
+        rng = Math.random()
+        if(rng < 0.2){
+            output("you found nothing")
+        } else if (rng < 0.4) {
+            gameCharacter.listOfItems.push("poison potion")
+            gameCharacter.listOfItems.push("poison potion")
+            output("you found 2 poison potions")
+        } else if (rng < 0.6) {
+            gameCharacter.listOfItems.push("ice potion")
+            gameCharacter.listOfItems.push("poison potion")
+            gameCharacter.listOfItems.push("health potion")
+            output("you found an ice potion, a poison potion, and a health potion")
+        } else if (rng < 0.8) {
+            gameCharacter.listOfItems.push("health potion")
+            gameCharacter.listOfItems.push("health potion")
+            gameCharacter.listOfItems.push("acid potion")
+            output("you found 2 health potions and an acid potion")
+        } else {
+            gameCharacter.listOfItems.push("holy potion")
+            gameCharacter.listOfItems.push("ice potion")
+            gameCharacter.listOfItems.push("acid potion")
+            gameCharacter.listOfItems.push("acid potion")
+            output("you found a holy potion, an ice potion, and 2 acid potions")
+        }
+    } else if (gameCharacter.class == "wizard") {
+        rng = Math.random()
+        if(rng < 0.2){
+            output("you found nothing")
+        } else if (rng < 0.4) {
+            gameCharacter.listOfItems.push("ice spell")
+            output("you found an ice spell")
+        } else if (rng < 0.6) {
+            gameCharacter.listOfItems.push("health spell")
+            output("you found a health spell")
+        } else if (rng < 0.8) {
+            gameCharacter.listOfItems.push("health potion")
+            gameCharacter.listOfItems.push("health potion")
+            gameCharacter.listOfItems.push("ice spell")
+            output("you found 2 health potions and an ice spell")
+        } else {
+            gameCharacter.listOfItems.push("rng spell")
+            output("you found a rng spell")
+        }
+    }
 
+    output("Moving deeper into dungeon (press command to continue)")
+    gameCharacter.gameState = 2
 }
 
 const showInventory = () => {
@@ -161,7 +314,6 @@ const showInventory = () => {
 
     for (let index = 0; index < gameCharacter.listOfItems.length; index++) {
         const element = gameCharacter.listOfItems[index];
-        console.log(element)
         const card = document.createElement("div")
         const title = document.createElement("h3")
         const description = document.createElement("p")
@@ -172,42 +324,52 @@ const showInventory = () => {
         if(element == "axe"){
             title.innerText = "axe"
             description.innerText = "A handy weapon"
+            card.classList.add("common")
         }
         if(element == "health potion"){
             title.innerText = "health potion"
             description.innerText = "A easy way to heal"
+            card.classList.add("rare")
         }
         if(element == "acid potion"){
             title.innerText = "acid potion"
             description.innerText = "Deals serious damage"
+            card.classList.add("uncommon")
         }
         if(element == "ice potion"){
             title.innerText = "ice potion"
             description.innerText = "Enemy can't make a move this turn and light damage"
+            card.classList.add("uncommon")
         }
         if(element == "holy potion"){
             title.innerText = "holy potion"
-            description.innerText = "Heals a lot and medium damage, extra damage to undead"
+            description.innerText = "Heals a lot, extra damage to undead"
+            card.classList.add("rare")
         }
         if(element == "poison potion"){
             title.innerText = "poison potion"
             description.innerText = "A small amount of damage, extra damage to living"
+            card.classList.add("common")
         }
         if(element == "fire spell"){
             title.innerText = "fire spell"
             description.innerText = "A medium amount of damage, extra damage to living"
+            card.classList.add("common")
         }
         if(element == "ice spell"){
             title.innerText = "ice spell"
             description.innerText = "A small amount of damage, enemy can't make a move this turn, single use"
+            card.classList.add("rare")
         }
         if(element == "health spell"){
             title.innerText = "health spell"
             description.innerText = "A large amount of healing, single use"
+            card.classList.add("rare")
         }
         if(element == "rng spell"){
             title.innerText = "rng spell"
             description.innerText = "Something crazy might happen..., sadly it is single use"
+            card.classList.add("rare")
         }
 
         card.appendChild(title)
@@ -217,6 +379,7 @@ const showInventory = () => {
 }
 
 const gameStateAction = () =>{
+    
     if(gameCharacter.gameState == 0) {
         output("Choose a character class: 1: barbarian, 2: alchemist, 3: wizard")
         gameCharacter.gameState += 1
