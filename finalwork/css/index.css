@@ -90,6 +90,13 @@ section {
     
 }
 
+.center {
+    margin: 10px;
+    justify-self: center;
+    justify-items: center;
+    align-items: center;
+}
+
 /* Game css*/
 
 .game-container {

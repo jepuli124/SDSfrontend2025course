@@ -25,11 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     //open/closes menu
-    menuButton = document.getElementById("menuButton")
+    const menuButton = document.getElementById("menuButton")
     menuButton.addEventListener('click', () => {
-        menu = document.getElementById("menu")
+        const menu = document.getElementById("menu")
 
         menu.classList.toggle("off")
+
+        const menuButtons = document.querySelectorAll(".menuItem");
+        menuButtons.forEach((button) => {
+            button.classList.toggle('on');
+            button.classList.toggle('off');
+        })
 
     });
 
@@ -39,11 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
         menu = document.getElementById("menu")
 
         menu.classList.toggle("off")
+        const menuButtons = document.querySelectorAll(".menuItem");
+        menuButtons.forEach((button) => {
+            button.classList.remove('on');
+            button.classList.add('off');
+        })
 
     });
 
     // Menu can now move screen, very epic
-    menuItems = document.querySelectorAll(".menuItem");
+    const menuItems = document.querySelectorAll(".menuItem");
     for (let index = 0; index < menuItems.length; index++) {
         menuItems[index].addEventListener('click', () => {
             // https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
